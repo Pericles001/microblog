@@ -18,6 +18,10 @@ class User(UserMixin,db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    @login.user_loader
+    def load-user(id):
+        return user.query.get(int(id))
 
 
 class Post(db.Model):
