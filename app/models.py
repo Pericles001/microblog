@@ -23,6 +23,11 @@ class User(UserMixin,db.Model):
     def load_user(id):
         return User.query.get(int(id))
 
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicons&s={}'.format(digest, size)
+
+
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key = True)
